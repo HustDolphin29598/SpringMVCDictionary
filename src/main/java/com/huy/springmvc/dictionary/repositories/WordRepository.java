@@ -49,6 +49,6 @@ public class WordRepository {
 
     public List<Word> findAll() {
         Session session = this.sessionFactory.getCurrentSession();
-        return session.createQuery("FROM words", Word.class).getResultList();
+        return session.createQuery("FROM words ", Word.class).getResultList();
     }
 }

@@ -73,8 +73,9 @@
 				<div id="accordion">
 					<div class="card">
 						<div class="card-header" style="vertical-align: middle">
-							<a class="card-link" data-toggle="collapse" aria-expanded="false"
+							<a class="card-link" data-toggle="collapse"
 								href="#word<%=i%>">${word.word}</a>
+								<div style="display:inline-block;color:brown"> [${word.wordtype}]</div>
 							<c:if test="${isAdmin==true}">
 								<button type="button" class="btn btn-warning" id="delete"
 									style="float: right; margin: auto 5px auto 5px"
@@ -114,7 +115,7 @@
 							</c:if>
 
 						</div>
-						<div id="word<%=i%>" class="collapse show"
+						<div id="word<%=i%>" class="accordion-body collapse"
 							data-parent="#accordion">
 							<div class="card-body">${word.meaning}</div>
 						</div>

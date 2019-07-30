@@ -46,7 +46,7 @@
 									</div>
 									<button type="submit"
 										class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
-										<span class="error" id="message-error" style="color:red"></span >
+									<span class="error" id="message-error" style="color: red"></span>
 								</form:form>
 							</div>
 							<!--/card-block-->
@@ -68,27 +68,16 @@
 
 </body>
 <script>
-function hideError() {
-	$("#username").keyup(function(){
-		$("#message-error").hide();
+	$(document).ready(function() {
+		console.log('aaaaaaaa');
+		var error = '${message}';
+		console.log(error);
+
+		if (error != '') {
+			$("#message-error").text(error);
+			$("#message-error").show();
+		}
+		//hideError();
 	});
-	$("#username").keydown(function(){
-		$("#message-error").hide();
-	});
-	$("#password").keyup(function(){
-		$("#message-error").hide();
-	});
-	$("#password").keydown(function(){
-		$("#message-error").hide();
-	});
-}
-$(document).ready(function(){
-	var error = '${message}';
-	if(error != '') {
-		$("#message-error").text(error);
-		$("#message-error").show();
-	}
-	//hideError();
-});
 </script>
 </html>

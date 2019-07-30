@@ -2,10 +2,8 @@ package com.huy.springmvc.dictionary.controllers;
 
 import java.util.List;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.constraints.Pattern.Flag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +30,7 @@ public class WordController {
 
     @RequestMapping("/search")
     public String searchWord(@RequestParam(value = "word", required = false) String name, Model model,
-            @RequestParam(value = "type", required = false) String type, HttpServletRequest request) {
+            @RequestParam(value = "type", required = false) String type ,HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object attribute = session.getAttribute("isAdmin");
         if (attribute != null) {
@@ -117,20 +115,14 @@ public class WordController {
 
     @RequestMapping("/addWord")
     public String doInsertWord(@ModelAttribute("Word") Word word, Model model) {
-        System.out.println("meaning " + word.getMeaning());
-        System.out.println("word: " + word.getWord());
-        if (word.getMeaning().equals("") || word.getWord().equals("")) {
-            model.addAttribute("message", "Please fill in the form");
-            return "add-word";
-        }
         List<Word> words = wordService.findByWord(word.getWord(), word.getWordtype());
         if (words.isEmpty()) {
             wordService.save(word);
             model.addAttribute("listWord", wordService.findAll());
             return "lookup";
         } else {
-            model.addAttribute("message", "Word already exists");
-            return "add-word";
+            model.addAttribute("message","Word already exists");
+            return "redirect:/add-word";
         }
 
     }

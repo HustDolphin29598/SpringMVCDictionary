@@ -40,7 +40,7 @@
 							</div>
 							<div style="margin: 5px auto 15px auto;">Meaning</div>
 							<form:textarea  style="border-radius:5px" rows="5" cols="74" path="meaning"/>
-							<button type="submit" class="btn btn-primary" style="float:right; margin-top:15px">Add</button>
+							<button type="submit" class="btn btn-primary" style="float:right; margin-top:15px">Done !</button>
 						</form:form>
 					</div>
 				</div>
