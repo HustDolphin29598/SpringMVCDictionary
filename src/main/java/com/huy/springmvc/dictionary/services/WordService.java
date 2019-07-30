@@ -33,8 +33,8 @@ public class WordService {
         return wordRepository.findById(id);
     }
 
-    public List<Word> findByWord(final String word) {
-        return wordRepository.findByWord(word);
+    public List<Word> findByWord(final String word, String type) {
+        return wordRepository.findByWord(word, type);
     }
 
     public void delete(final int id) {

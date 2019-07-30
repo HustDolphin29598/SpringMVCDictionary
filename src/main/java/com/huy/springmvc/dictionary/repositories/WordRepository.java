@@ -32,10 +32,11 @@ public class WordRepository {
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public List<Word> findByWord(final String word) {
+    public List<Word> findByWord(final String word, String type) {
         Session session = this.sessionFactory.openSession();
-        Query query = session.createQuery("FROM words as w where w.word like concat(:word,'%')");
+        Query query = session.createQuery("FROM words as w where w.word like concat(:word,'%') and w.wordtype like :type");
             query.setParameter("word", word);
+            query.setParameter("type", type);
             List<Word> words = query.getResultList();
             session.close();
             return words;

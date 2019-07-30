@@ -1,5 +1,8 @@
 package com.huy.springmvc.dictionary.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ public class UserController {
     @RequestMapping("/")
     public String getFirstPage() {
         
-        return "login";
+        return "redirect:login";
     }
     
     @GetMapping("/login")
@@ -31,19 +34,28 @@ public class UserController {
     }
     
     @PostMapping("/login")
-    public String login(@ModelAttribute("user") User user, Model model) {
+    public String login(@ModelAttribute("user") User user, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         int result = userService.checkAuth(user.getUsername(), user.getPassword());
         if(result != -1) {
             if(result == 0) {
-                model.addAttribute("role","user");
+                session.setAttribute("isAdmin", false);
                 return "lookup";
             } else {
-                model.addAttribute("role","admin");
+                session.setAttribute("isAdmin", true);
                 return "lookup";
             }
         } else {
             model.addAttribute("message", "Invalid username or password");
             return "login";
         }
+    }
+    
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        System.out.println("tweeeeeeee");
+        HttpSession session = request.getSession();
+        session.removeAttribute("isAdmin");
+        return "redirect:/login";
     }
 }
